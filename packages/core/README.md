@@ -9,16 +9,29 @@ Inspired by the amazing Driver.js, this library lets you highlight UI components
 - **Lightweight & Dependency-Free**: Built from the ground up with only React and React Native
 - **Declarative API**: Define your tour steps in a simple array of objects
 - **Fully Customizable**: Full control over the look and feel of the popover and overlay
-- **Smooth Animations**: Support for fluid transitions between steps
+- **Smooth Animations**: Support for fluid transitions between steps with Reanimated
 - **Written in TypeScript**: Type-safe with autocompletion for a better developer experience
 
 ## Installation
 
 ```bash
-npm install @sherpa/core
+npm install @sherpa/core react-native-reanimated
 # or
-yarn add @sherpa/core
+yarn add @sherpa/core react-native-reanimated
 ```
+
+### Setup Reanimated
+
+Add the Reanimated plugin to your `babel.config.js`:
+
+```js
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],
+  plugins: ['react-native-reanimated/plugin'],
+};
+```
+
+> **Note**: The Reanimated plugin must be listed **last** in the plugins array.
 
 ## Quick Start
 
@@ -109,7 +122,8 @@ interface TourConfig {
   showButtons?: boolean; // Default: true
   showProgress?: boolean; // Default: true
   allowClose?: boolean; // Default: true
-  animate?: boolean; // Default: true
+  animate?: boolean; // Default: true - Requires react-native-reanimated
+  animationDuration?: number; // Default: 300ms
   overlayColor?: string; // Default: 'rgba(0, 0, 0, 0.75)'
   popoverStyle?: ViewStyle;
   overlayStyle?: ViewStyle;
@@ -225,6 +239,33 @@ const tourConfig: TourConfig = {
   onSkip: () => console.log('Tour skipped'),
 };
 ```
+
+### Animations
+
+The library uses `react-native-reanimated` for smooth animations. Animations are enabled by default but can be disabled:
+
+```tsx
+const tourConfig: TourConfig = {
+  steps: [...],
+  animate: false, // Disable animations
+};
+```
+
+You can also customize animation duration:
+
+```tsx
+const tourConfig: TourConfig = {
+  steps: [...],
+  animate: true,
+  animationDuration: 500, // 500ms animations
+};
+```
+
+The library provides both animated and non-animated components:
+- `AnimatedOverlay` / `Overlay`
+- `AnimatedPopover` / `Popover`
+
+`TourOverlay` automatically switches between them based on the `animate` config option.
 
 ## Examples
 

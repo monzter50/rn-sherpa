@@ -10,9 +10,9 @@ export type {
 export { TourProvider, useTour } from './context/TourContext';
 
 // Export components
-export { Overlay } from './components/Overlay';
-export { Popover } from './components/Popover';
 export { TourOverlay } from './components/TourOverlay';
+export { AnimatedOverlay } from './components/AnimatedOverlay';
+export { AnimatedPopover } from './components/AnimatedPopover';
 
 // Export hooks
 export { useStepRef } from './hooks/useStepRef';

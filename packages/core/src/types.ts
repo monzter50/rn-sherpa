@@ -85,10 +85,10 @@ export interface TourConfig {
   allowClose?: boolean;
 
   /**
-   * Whether to animate transitions between steps
-   * @default true
+   * Animation duration in milliseconds
+   * @default 300
    */
-  animate?: boolean;
+  animationDuration?: number;
 
   /**
    * Overlay color
