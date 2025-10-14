@@ -16,3 +16,5 @@ export { AnimatedPopover } from './components/AnimatedPopover';
 
 // Export hooks
 export { useStepRef } from './hooks/useStepRef';
+export { useAutoScroll } from './hooks/useAutoScroll';
+export type { UseAutoScrollOptions } from './hooks/useAutoScroll';

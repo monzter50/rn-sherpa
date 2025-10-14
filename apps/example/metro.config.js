@@ -25,9 +25,9 @@ const config = {
         extraNodeModules: {
             'react-native': path.resolve(__dirname, 'node_modules/react-native'),
         },
-        // Asegurar que Metro pueda resolver el módulo @sherpa/core
+        // Asegurar que Metro pueda resolver el módulo rn-sherpa
         alias: {
-            '@sherpa/core': path.resolve(projectRoot, 'packages/core/src'),
+            'rn-sherpa': path.resolve(projectRoot, 'packages/core/src'),
         },
     },
 };

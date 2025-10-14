@@ -24,8 +24,9 @@ import {
   TourOverlay,
   useTour,
   useStepRef,
+  useAutoScroll,
   type TourConfig,
-} from '@sherpa/core';
+} from 'rn-sherpa';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -95,6 +96,12 @@ function AppContent() {
   // Create ref for ScrollView to enable scrolling to elements
   const scrollViewRef = React.useRef<ScrollView>(null);
 
+  // Automatically scroll to elements during tour
+  useAutoScroll(scrollViewRef, {
+    topPadding: 100,
+    animated: true,
+  });
+
   // Assign refs to tour steps
   React.useEffect(() => {
     if (tour.currentStep) {
@@ -111,34 +118,6 @@ function AppContent() {
       }
     }
   }, [tour.currentStep, headerRef, feature1Ref, settingsRef]);
-
-  // Scroll to element when tour step changes
-  React.useEffect(() => {
-    if (tour.isActive && tour.currentStep?.ref?.current && scrollViewRef.current) {
-      const ref = tour.currentStep.ref.current;
-
-      // Measure the element and scroll to it
-      ref.measureLayout(
-        scrollViewRef.current as any,
-        (_x: number, y: number, _width: number, height: number) => {
-          // Scroll to position with some padding
-          scrollViewRef.current?.scrollTo({
-            y: Math.max(0, y - 100), // Add 100px padding from top
-            animated: true,
-          });
-        },
-        () => {
-          // Fallback: If measureLayout fails, try scrollIntoView pattern
-          ref.measureInWindow((_x: number, y: number) => {
-            scrollViewRef.current?.scrollTo({
-              y: Math.max(0, y - 100),
-              animated: true,
-            });
-          });
-        }
-      );
-    }
-  }, [tour.isActive, tour.currentStep, tour.currentStepIndex]);
 
   return (
     <View style={styles.container}>

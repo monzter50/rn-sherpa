@@ -1,19 +1,48 @@
 {
-  "name": "@sherpa/core",
-  "version": "0.0.0",
-  "description": "Core logic",
-  "main": "src/index",
-  "codegenConfig": {
-    "name": "CoreSpec",
-    "type": "modules",
-    "jsSrcsDir": "src"
+  "name": "rn-sherpa",
+  "version": "0.1.0-beta.1",
+  "description": "A lightweight, flexible React Native library for creating powerful, step-by-step guided product tours with smart positioning and animations",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "react-native": "src/index.tsx",
+  "source": "src/index.tsx",
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
   },
-  "author": " <> ()",
-  "license": "UNLICENSED",
-  "homepage": "#readme",
+  "keywords": [
+    "react-native",
+    "tour",
+    "product-tour",
+    "onboarding",
+    "guide",
+    "walkthrough",
+    "tutorial",
+    "spotlight",
+    "highlight",
+    "driver.js",
+    "shepherd",
+    "intro.js",
+    "react-native-tour",
+    "react-native-walkthrough"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monzter50/sherpa.git",
+    "directory": "packages/core"
+  },
+  "author": "monzter50 jglez.dev@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/monzter50/sherpa/issues"
+  },
+  "homepage": "https://github.com/monzter50/sherpa#readme",
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
+    "react": ">=16.8.0",
+    "react-native": ">=0.60.0",
     "react-native-reanimated": ">=3.0.0"
   },
   "devDependencies": {
@@ -21,11 +50,10 @@
     "@types/react": "^19.1.0",
     "react": "19.1.0",
     "react-native": "0.81.1",
-    "react-native-reanimated": "^3.16.4"
+    "react-native-reanimated": "^3.16.4",
+    "typescript": "^5.0.0"
   },
-  "create-react-native-library": {
-    "languages": "kotlin-objc",
-    "type": "turbo-module",
-    "version": "0.54.3"
+  "publishConfig": {
+    "access": "public"
   }
 }
