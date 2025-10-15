@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release to NPM
+    runs-on: ubuntu-latest
+    # Only run on version commits (when PR is merged)
+    if: "startsWith(github.event.head_commit.message, 'chore: version packages')"
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build all packages
+        run: yarn build
+
+      - name: Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # Only publish, don't create PRs
+          publish: yarn changeset publish
+          createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Published packages info
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "🎉 Packages published successfully!"
+          echo "Published packages: ${{ steps.changesets.outputs.publishedPackages }}"

@@ -3,15 +3,25 @@
   "version": "0.1.0-beta.1",
   "description": "A lightweight, flexible React Native library for creating powerful, step-by-step guided product tours with smart positioning and animations",
   "main": "src/index.tsx",
-  "types": "src/index.tsx",
+  "types": "lib/index.d.ts",
   "react-native": "src/index.tsx",
   "source": "src/index.tsx",
   "files": [
     "src",
-    "README.md"
+    "lib",
+    "README.md",
+    "LICENSE",
+    "android",
+    "ios",
+    "Core.podspec"
   ],
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf lib",
+    "prepublishOnly": "yarn clean && yarn build"
   },
   "keywords": [
     "react-native",

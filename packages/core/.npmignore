@@ -27,12 +27,10 @@ __mocks__/
 dist/
 build/
 *.tsbuildinfo
+tsconfig.tsbuildinfo
 
 # Example app
 example/
-android/
-ios/
-*.podspec
 
 # Git
 .git/
