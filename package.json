@@ -6,7 +6,12 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo check-types"
+    "check-types": "turbo check-types",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "version-packages:beta": "changeset version --snapshot beta",
+    "release": "turbo build --filter=rn-sherpa && changeset publish",
+    "release:beta": "turbo build --filter=rn-sherpa && changeset publish --tag beta"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

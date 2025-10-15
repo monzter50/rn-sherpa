@@ -1,0 +1,54 @@
+name: Release Beta
+
+on:
+  push:
+    branches:
+      - beta
+      - develop
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release-beta:
+    name: Release Beta to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build all packages
+        run: yarn build
+
+      - name: Enter prerelease mode
+        run: yarn changeset pre enter beta
+
+      - name: Version packages (beta)
+        run: yarn changeset version
+
+      - name: Publish to npm with beta tag
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: yarn changeset publish --tag beta
+          createGithubReleases: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Published packages info
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "🚀 Beta packages published successfully!"
+          echo "Published packages: ${{ steps.changesets.outputs.publishedPackages }}"
+          echo "Install with: npm install rn-sherpa@beta"
