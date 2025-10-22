@@ -1,6 +1,7 @@
 {
   "name": "rn-sherpa",
   "version": "0.1.0-beta.1",
+  "type": "module",
   "description": "A lightweight, flexible React Native library for creating powerful, step-by-step guided product tours with smart positioning and animations",
   "main": "src/index.tsx",
   "types": "lib/index.d.ts",
@@ -59,6 +60,9 @@
     "@changesets/cli": "^2.29.7",
     "@react-native/babel-preset": "0.81.1",
     "@types/react": "^19.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint": "^9.38.0",
     "react": "19.1.0",
     "react-native": "0.81.1",
     "react-native-reanimated": "^3.16.4",
